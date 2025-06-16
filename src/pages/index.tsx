@@ -1,22 +1,20 @@
 import { useEffect, useState } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Papa from 'papaparse'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-
-interface DataPoint {
-  name: string
-  value: number
-}
+import Chart, { DataPoint } from '@/components/Chart'
 
 export default function Home() {
   const [data, setData] = useState<DataPoint[]>([])
 
   useEffect(() => {
-    const csv = `name,value\nA,12\nB,23\nC,18\nD,30`
-    const result = Papa.parse(csv, { header: true })
-    const parsed = result.data as DataPoint[]
-    setData(parsed)
+    fetch('/sample-data.csv')
+      .then((res) => res.text())
+      .then((text) => {
+        const result = Papa.parse<DataPoint>(text, { header: true })
+        const parsed = result.data as DataPoint[]
+        setData(parsed)
+      })
   }, [])
 
   return (
@@ -28,17 +26,7 @@ export default function Home() {
       >
         QA Dashboard
       </motion.h1>
-      <div className="w-full h-64">
-        <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#7f5af0" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <Chart data={data} />
       <Button>Example Button</Button>
     </main>
   )

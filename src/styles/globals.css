@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: theme(colors.background);
-  --foreground: theme(colors.foreground);
-  --accent: theme(colors.accent);
+  --background: theme('colors.background');
+  --foreground: theme('colors.foreground');
+  --accent: theme('colors.accent');
 }
 
 body {
