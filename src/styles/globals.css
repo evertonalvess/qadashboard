@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+:root {
+  --background: theme(colors.background);
+  --foreground: theme(colors.foreground);
+  --accent: theme(colors.accent);
+}
+
+body {
+  @apply bg-background text-foreground font-sans min-h-screen;
+}
