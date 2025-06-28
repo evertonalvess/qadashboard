@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-multipart
+python-jose
+sentence-transformers
+llama-index
+qdrant-client
+pdfplumber
+python-docx
+markdown
+requests

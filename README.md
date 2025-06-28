@@ -1,23 +1,36 @@
-# QA Dashboard Starter
+# Offline NotebookLM Clone
 
-This project is a Next.js application styled with Tailwind CSS and components from **shadcn/ui**. It includes starter dependencies for interactive charts, animations, and CSV parsing.
+Este projeto cria um workspace colaborativo de notas com IA totalmente offline, inspirado no NotebookLM. Ele inclui frontend React, backend FastAPI, vetor store Qdrant e uso do modelo `mistral` via Ollama.
 
-## Features
+## Estrutura
 
-- **Next.js** with TypeScript
-- **Tailwind CSS** configured for a dark futuristic palette
-- **shadcn/ui** style components (see `src/components/ui`)
-- **Recharts** for charting
-- **Framer Motion** for animations
-- **PapaParse** for parsing CSV data
+- `frontend/` – aplicação React com TipTap e TailwindCSS
+- `backend/` – API FastAPI para upload, importação do Jira, perguntas e autenticação
+- `scripts/` – scripts de ingestão de documentos
+- `docker/` – compose para subir Qdrant, Ollama e o backend
 
-## Development
+## Setup Rápido
 
-Install dependencies and start the development server:
+1. Instale as dependências do frontend:
 
 ```bash
+cd frontend
 npm install
-npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
+2. Construa o backend e Qdrant via Docker Compose:
+
+```bash
+cd docker
+docker compose up --build
+```
+
+3. Acesse o frontend em `http://localhost:5173` e a API em `http://localhost:8000`.
+
+Para ingestão manual de arquivos use:
+
+```bash
+python scripts/ingest.py caminho/do/arquivo.pdf
+```
+
+O sistema funciona 100% offline após o download inicial das imagens Docker e do modelo Ollama.
